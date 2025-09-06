@@ -1,12 +1,15 @@
 package fr.nkri.core.auth.cmds;
 
 import fr.nkri.core.EnderPortal;
+import fr.nkri.core.api.APIClient;
 import fr.nkri.core.auth.AuthManager;
 import fr.nkri.japi.cmds.CommandArguments;
 import fr.nkri.japi.cmds.ICommand;
 import fr.nkri.japi.cmds.interfaces.Command;
 import fr.nkri.japi.utils.JUtils;
 import org.bukkit.Bukkit;
+
+import java.io.IOException;
 
 public class LoginCommand extends ICommand {
 
@@ -67,6 +70,16 @@ public class LoginCommand extends ICommand {
                 Stock token in local
                  */
                 this.authManager.addToken(args.getPlayer().getUniqueId(), token);
+
+                /**
+                 * TEST: recovery of player game data
+                 */
+                try {
+                    final String playerProfile = APIClient.get("http://localhost:3000/users/user", token);
+                    System.out.println(playerProfile);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
         });
 
