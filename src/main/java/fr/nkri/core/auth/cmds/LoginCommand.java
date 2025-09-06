@@ -34,13 +34,29 @@ public class LoginCommand extends ICommand {
             return false;
         }
 
+        args.getPlayer().sendMessage(JUtils.color("&eConnexion en cours..."));
+
         //Call async method
         authManager.getAuthService().login(username, password).thenAccept(result -> {
 
             //I'm coming back to the main Minecraft thread
             Bukkit.getScheduler().runTask(EnderPortal.getINSTANCE(), () -> {
-                if(result == null || result.getToken() == null){
-                    args.getPlayer().sendMessage(JUtils.color("&cEchec de connexion : " + (result != null && result.getMessage() != null ? result.getMessage() : "Erreur inconnue")));
+
+                /*
+                No response
+                 */
+                if(result == null){
+                    args.getPlayer().sendMessage(JUtils.color("&cEchec de connexion à l'API"));
+                    return;
+                }
+
+                /*
+                If the token is empty or null, retrieves the API error message
+                or displays 'Erreur incconue', then sends it to the player.
+                 */
+                if(result.getToken() == null || result.getToken().isEmpty()){
+                    final String errorMessage = result.getMessage() != null ? result.getMessage() : "Erreur incconue";
+                    args.getPlayer().sendMessage(JUtils.color("&cEchec de connexion : " + errorMessage));
                     return;
                 }
 

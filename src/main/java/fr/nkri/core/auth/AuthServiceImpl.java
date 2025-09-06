@@ -28,7 +28,7 @@ public class AuthServiceImpl implements IAuthService{
             try{
                 final LoginRequest loginRequestDTO = new LoginRequest(username, password);
                 final String jsonBody = GSON.toJson(loginRequestDTO);
-                System.out.println(jsonBody);
+                //System.out.println(jsonBody);
                 final String response = APIClient.post(API_URL + "/login", jsonBody);
 
                 return GSON.fromJson(response, AuthResponse.class);
