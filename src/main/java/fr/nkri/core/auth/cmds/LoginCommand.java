@@ -19,6 +19,14 @@ public class LoginCommand extends ICommand {
         final String password = args.getArgs(0);
 
         /**
+         * Check args
+         */
+        if(args.length() == 0){
+            args.getPlayer().sendMessage(JUtils.color("&c/login <password>"));
+            return false;
+        }
+
+        /**
          * Check if password is not null
          */
         if(password.isEmpty()){

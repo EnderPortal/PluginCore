@@ -2,8 +2,7 @@ package fr.nkri.core.auth.dtos;
 
 public class LoginRequest {
 
-    private final String username;
-    private final String password;
+    private final String username, password;
 
     /**
      * Request sent to the API containing the

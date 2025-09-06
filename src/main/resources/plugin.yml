@@ -1,0 +1,6 @@
+name: PluginCore
+main: fr.nkri.core.EnderPortal
+version: 1.0
+author: NKRI
+depend:
+  - JAPI
