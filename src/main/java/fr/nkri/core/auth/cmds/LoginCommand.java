@@ -13,7 +13,7 @@ public class LoginCommand extends ICommand {
     private final AuthManager authManager = AuthManager.getINSTANCE();
 
     @Override
-    @Command(name = "/login")
+    @Command(name = "login")
     public boolean onCommand(final CommandArguments args) {
         final String username = args.getPlayer().getName();
         final String password = args.getArgs(0);
