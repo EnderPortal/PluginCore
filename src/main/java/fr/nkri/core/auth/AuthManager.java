@@ -1,5 +1,7 @@
 package fr.nkri.core.auth;
 
+import fr.nkri.core.auth.events.AuthListener;
+import fr.nkri.japi.JAPI;
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -25,5 +27,35 @@ public class AuthManager {
         INSTANCE = this;
         this.authService = new AuthServiceImpl();
         this.tokenMap = new HashMap<>();
+
+        //register event bukkit
+        JAPI.getInstance().registerListeners(new AuthListener(this));
+    }
+
+    /**
+     * Removes the player from the token list
+     * @param uuid player UUID
+     */
+    public void removeToken(final UUID uuid){
+        this.tokenMap.remove(uuid);
+        //TODO : logout
+    }
+
+    /**
+     * Adds a player to the token list
+     * @param uuid player UUID
+     * @param token access_token
+     */
+    public void addToken(final UUID uuid, final String token){
+        this.tokenMap.putIfAbsent(uuid, token);
+    }
+
+    /**
+     * Check if the player is logged in
+     * @param uuid player UUID
+     * @return true if it is login, otherwise false
+     */
+    public boolean isAuth(final UUID uuid){
+        return this.tokenMap.containsKey(uuid);
     }
 }

@@ -52,10 +52,10 @@ public class LoginCommand extends ICommand {
 
                 /*
                 If the token is empty or null, retrieves the API error message
-                or displays 'Erreur incconue', then sends it to the player.
+                or displays 'Erreur inconue', then sends it to the player.
                  */
                 if(result.getToken() == null || result.getToken().isEmpty()){
-                    final String errorMessage = result.getMessage() != null ? result.getMessage() : "Erreur incconue";
+                    final String errorMessage = result.getMessage() != null ? result.getMessage() : "Erreur inconue";
                     args.getPlayer().sendMessage(JUtils.color("&cEchec de connexion : " + errorMessage));
                     return;
                 }
@@ -66,7 +66,7 @@ public class LoginCommand extends ICommand {
                 /*
                 Stock token in local
                  */
-                this.authManager.getTokenMap().put(args.getPlayer().getUniqueId(), token);
+                this.authManager.addToken(args.getPlayer().getUniqueId(), token);
             });
         });
 
