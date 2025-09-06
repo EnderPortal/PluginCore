@@ -1,6 +1,6 @@
 # PluginCore
 
-PluginCore pour l'authentification des joueurs via un compte créé avec l'API EnderPortal.  
+> PluginCore pour l'authentification des joueurs via un compte créé avec l'API EnderPortal.  
 Construit avec **Java 8**, **Spigot 1.8.8**, et la librairie **JAPI**.
 ---
 
