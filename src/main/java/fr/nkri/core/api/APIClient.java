@@ -30,7 +30,18 @@ public class APIClient {
                 os.write(input, 0, input.length);
             }
 
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+            /**
+             * Error detection
+             */
+            InputStream stream;
+            if(connection.getResponseCode() >= 400){
+                stream = connection.getErrorStream();
+            }
+            else{
+                stream = connection.getInputStream();
+            }
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(stream, "utf-8"))) {
                 final StringBuilder response = new StringBuilder();
 
                 String line;

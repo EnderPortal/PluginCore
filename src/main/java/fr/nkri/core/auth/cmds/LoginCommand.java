@@ -13,7 +13,7 @@ public class LoginCommand extends ICommand {
     private final AuthManager authManager = AuthManager.getINSTANCE();
 
     @Override
-    @Command(name = "/login")
+    @Command(name = "login")
     public boolean onCommand(final CommandArguments args) {
         final String username = args.getPlayer().getName();
         final String password = args.getArgs(0);
@@ -31,8 +31,8 @@ public class LoginCommand extends ICommand {
 
             //I'm coming back to the main Minecraft thread
             Bukkit.getScheduler().runTask(EnderPortal.getINSTANCE(), () -> {
-                if(result == null){
-                    args.getPlayer().sendMessage(JUtils.color("&cEchec de connexion à l'API"));
+                if(result == null || result.getToken() == null){
+                    args.getPlayer().sendMessage(JUtils.color("&cEchec de connexion : " + (result != null && result.getMessage() != null ? result.getMessage() : "Erreur inconnue")));
                     return;
                 }
 
