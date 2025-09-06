@@ -62,6 +62,11 @@ public class LoginCommand extends ICommand {
 
                 final String token = result.getToken();
                 args.getPlayer().sendMessage(JUtils.color("&aAuthentification réussie !"));
+
+                /*
+                Stock token in local
+                 */
+                this.authManager.getTokenMap().put(args.getPlayer().getUniqueId(), token);
             });
         });
 
