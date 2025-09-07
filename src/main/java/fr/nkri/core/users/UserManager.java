@@ -49,14 +49,23 @@ public class UserManager {
             //I'm coming back to the main Minecraft thread
             Bukkit.getScheduler().runTask(EnderPortal.getINSTANCE(), () -> {
                 if(user == null){
-                    player.sendMessage(JUtils.color("&cErreur : impossible de lire vos données."));
+                    player.sendMessage(JUtils.color("&cErreur : impossible de récupérer vos données."));
                     return;
                 }
 
                 this.users.putIfAbsent(player.getUniqueId(), user);
 
-                player.sendMessage(JUtils.color("&6Heureux de vous revoir %name%, coins: %coins%")
-                        .replace("%name%", user.getUsername()).replace("%coins%", String.valueOf(user.getProfile().getCoins())));
+                player.sendMessage(JUtils.color("&aAuthentification réussie, données chargées !").replace("%name%", player.getName()));
+                player.sendMessage("");
+
+                /**
+                 * Message temporaire :)
+                 */
+                player.sendMessage(JUtils.color("&7—————————————————————————————————————————————————"));
+                player.sendMessage(JUtils.color("&5&lBienvenue &e%name% &5sur &d&lEnderPortal").replace("%name%", user.getUsername()));
+                player.sendMessage(JUtils.color("&6Vos statistiques:"));
+                player.sendMessage(JUtils.color("&eCoins : &a%coins%".replace("%coins%", String.valueOf(user.getProfile().getCoins()))));
+                player.sendMessage(JUtils.color("&7—————————————————————————————————————————————————"));
             });
         });
     }

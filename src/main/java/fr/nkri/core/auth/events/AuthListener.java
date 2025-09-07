@@ -7,16 +7,27 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 
 public class AuthListener implements Listener {
 
     private final AuthManager authManager;
     public AuthListener(final AuthManager authManager) {
         this.authManager = authManager;
+    }
+
+    //Feedback player
+    @EventHandler
+    public void onJoin(final PlayerJoinEvent e){
+        e.setJoinMessage(null);
+        e.getPlayer().sendMessage(JUtils.color("&7—————————————————————————————————————————————————"));
+        e.getPlayer().sendMessage(JUtils.color("&5&lBienvenue sur &d&lEnderPortal"));
+        e.getPlayer().sendMessage("");
+        e.getPlayer().sendMessage(JUtils.color("&ePour vous connecter, utilisez la commande :"));
+        e.getPlayer().sendMessage(JUtils.color("&a/login <password>"));
+        e.getPlayer().sendMessage("");
+        e.getPlayer().sendMessage(JUtils.color("&7&oPas encore de compte ? Créez-en un ici : &9&ohttp://localhost:5173"));
+        e.getPlayer().sendMessage(JUtils.color("&7—————————————————————————————————————————————————"));
     }
 
     //remove player token
@@ -61,6 +72,14 @@ public class AuthListener implements Listener {
     public void onBreak(final BlockBreakEvent e){
         if(!this.authManager.isAuth(e.getPlayer().getUniqueId())) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onChat(final AsyncPlayerChatEvent e){
+        if(!this.authManager.isAuth(e.getPlayer().getUniqueId())) {
+            e.setCancelled(true);
+            e.getPlayer().sendMessage(JUtils.color("&cVous devez vous connecter : §e/login <password>&c."));
         }
     }
 }
