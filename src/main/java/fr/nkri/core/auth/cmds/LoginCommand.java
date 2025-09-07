@@ -15,7 +15,6 @@ import java.io.IOException;
 public class LoginCommand extends ICommand {
 
     private final AuthManager authManager = AuthManager.getINSTANCE();
-    private final UserManager userManager = UserManager.getINSTANCE();
 
     @Override
     @Command(name = "login")
@@ -84,7 +83,7 @@ public class LoginCommand extends ICommand {
                 /**
                  * Load an account and recovery of player game data
                  */
-                this.userManager.loadUser(args.getPlayer());
+                UserManager.getINSTANCE().loadUser(args.getPlayer());
             });
         });
 

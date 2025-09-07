@@ -30,9 +30,6 @@ public class EnderPortal extends JavaPlugin {
         this.authManager = new AuthManager();
         this.userManager = new UserManager();
         this.serverManager = new ServerManager(this);
-
-        //register commands
-        JAPI.getInstance().registerCommand(new LoginCommand());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package fr.nkri.core.auth;
 
+import fr.nkri.core.auth.cmds.LoginCommand;
 import fr.nkri.core.auth.events.AuthListener;
 import fr.nkri.core.auth.services.AuthServiceImpl;
 import fr.nkri.core.auth.services.IAuthService;
@@ -32,6 +33,9 @@ public class AuthManager {
 
         //register event bukkit
         JAPI.getInstance().registerListeners(new AuthListener(this));
+
+        //register commands
+        JAPI.getInstance().registerCommand(new LoginCommand());
     }
 
     /**
