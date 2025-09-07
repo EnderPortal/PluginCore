@@ -1,6 +1,6 @@
-package fr.nkri.core.auth;
+package fr.nkri.core.auth.services;
 
-import fr.nkri.core.auth.dtos.AuthResponse;
+import fr.nkri.core.auth.services.dtos.AuthResponse;
 
 import java.util.concurrent.CompletableFuture;
 

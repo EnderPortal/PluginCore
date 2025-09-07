@@ -1,9 +1,9 @@
-package fr.nkri.core.auth;
+package fr.nkri.core.auth.services;
 
 import com.google.gson.Gson;
 import fr.nkri.core.api.APIClient;
-import fr.nkri.core.auth.dtos.AuthResponse;
-import fr.nkri.core.auth.dtos.LoginRequest;
+import fr.nkri.core.auth.services.dtos.AuthResponse;
+import fr.nkri.core.auth.services.dtos.LoginRequest;
 
 import java.util.concurrent.CompletableFuture;
 

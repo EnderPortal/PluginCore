@@ -3,6 +3,7 @@ package fr.nkri.core.auth.cmds;
 import fr.nkri.core.EnderPortal;
 import fr.nkri.core.api.APIClient;
 import fr.nkri.core.auth.AuthManager;
+import fr.nkri.core.users.UserManager;
 import fr.nkri.japi.cmds.CommandArguments;
 import fr.nkri.japi.cmds.ICommand;
 import fr.nkri.japi.cmds.interfaces.Command;
@@ -74,12 +75,15 @@ public class LoginCommand extends ICommand {
                 /**
                  * TEST: recovery of player game data
                  */
-                try {
-                    final String playerProfile = APIClient.get("http://localhost:3000/users/user", token);
-                    System.out.println(playerProfile);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                UserManager.getINSTANCE().getUserService().getUser(args.getPlayer().getUniqueId()).thenAccept(user -> {
+                    if(user == null){
+                        args.getPlayer().sendMessage(JUtils.color("&cErreur : impossible de lire vos données."));
+                        return;
+                    }
+
+                    args.getPlayer().sendMessage(JUtils.color("&6Heureux de vous revoir %name%, coins: %coins%")
+                            .replace("%name%", user.getUsername()).replace("%coins%", String.valueOf(user.getProfile().getCoins())));
+                });
             });
         });
 

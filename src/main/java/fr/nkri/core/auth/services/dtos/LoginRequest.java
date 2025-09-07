@@ -1,4 +1,4 @@
-package fr.nkri.core.auth.dtos;
+package fr.nkri.core.auth.services.dtos;
 
 public class LoginRequest {
 

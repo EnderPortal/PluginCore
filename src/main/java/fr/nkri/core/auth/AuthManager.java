@@ -1,6 +1,8 @@
 package fr.nkri.core.auth;
 
 import fr.nkri.core.auth.events.AuthListener;
+import fr.nkri.core.auth.services.AuthServiceImpl;
+import fr.nkri.core.auth.services.IAuthService;
 import fr.nkri.japi.JAPI;
 import lombok.Getter;
 
