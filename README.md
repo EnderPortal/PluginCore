@@ -9,6 +9,12 @@ Construit avec **Java 8**, **Spigot 1.8.8**, et la librairie **JAPI**.
 1. Télécharger le projet ou le plugin compilé.
 2. Placer le `.jar` dans le dossier `plugins` de votre serveur Spigot 1.8.8.
 3. Démarrer le serveur.
+4. Editer `env.yml` dans /plugins/EnderPortal :
+
+```
+env:
+  API_KEY: "MY_API_KEY"
+```
 ---
 
 ## 🔑 Commandes
