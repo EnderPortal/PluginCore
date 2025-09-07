@@ -7,6 +7,7 @@ import fr.nkri.core.auth.cmds.LoginCommand;
 import fr.nkri.core.users.User;
 import fr.nkri.core.users.UserManager;
 import fr.nkri.japi.JAPI;
+import fr.nkri.japi.utils.configs.ConfigFile;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,8 +35,8 @@ public class EnderPortal extends JavaPlugin {
         /**
          * TEST : CALL API -> /hello, protected route by API KEY
          */
-        //TODO : changer l'API KEY, mettre dans un .yml qui ne sera pas push sur GITHUB
-        final String apiKey = "7E!HT$pmAT9o8kQfqfpJPFzPfA6mMpHrjYCSn&4P";
+        final ConfigFile envConfig = new ConfigFile(this, "env.yml");
+        final String apiKey = envConfig.get().getString("env.API_KEY");
 
         try {
             final String response = APIClient.get("http://localhost:3000/hello", apiKey);
