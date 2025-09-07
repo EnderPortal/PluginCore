@@ -32,6 +32,14 @@ public class LoginCommand extends ICommand {
         }
 
         /**
+         * Check if player is already login
+         */
+        if(this.authManager.getTokenMap().containsKey(args.getPlayer().getUniqueId())){
+            args.getPlayer().sendMessage(JUtils.color("&cVous êtes déjà connecté."));
+            return false;
+        }
+
+        /**
          * Check if password is not null
          */
         if(password.isEmpty()){
