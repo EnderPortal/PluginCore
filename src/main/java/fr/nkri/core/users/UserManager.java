@@ -1,6 +1,7 @@
 package fr.nkri.core.users;
 
 import fr.nkri.core.EnderPortal;
+import fr.nkri.core.users.cmds.CoinsCommand;
 import fr.nkri.core.users.events.UserListener;
 import fr.nkri.core.users.services.UserServiceImpl;
 import fr.nkri.japi.JAPI;
@@ -35,6 +36,11 @@ public class UserManager {
          * Register listeners
          */
         JAPI.getInstance().registerListeners(new UserListener(this));
+
+        /**
+         * Register Commands
+         */
+        JAPI.getInstance().registerCommand(new CoinsCommand(this));
     }
 
     /**
@@ -56,16 +62,6 @@ public class UserManager {
                 this.users.putIfAbsent(player.getUniqueId(), user);
 
                 player.sendMessage(JUtils.color("&aAuthentification réussie, données chargées !").replace("%name%", player.getName()));
-                player.sendMessage("");
-
-                /**
-                 * Message temporaire :)
-                 */
-                player.sendMessage(JUtils.color("&7—————————————————————————————————————————————————"));
-                player.sendMessage(JUtils.color("&5&lBienvenue &e%name% &5sur &d&lEnderPortal").replace("%name%", user.getUsername()));
-                player.sendMessage(JUtils.color("&6Vos statistiques:"));
-                player.sendMessage(JUtils.color("&eCoins : &a%coins%".replace("%coins%", String.valueOf(user.getProfile().getCoins()))));
-                player.sendMessage(JUtils.color("&7—————————————————————————————————————————————————"));
             });
         });
     }

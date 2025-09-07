@@ -61,7 +61,7 @@ public class LoginCommand extends ICommand {
                  */
                 if(result.getToken() == null || result.getToken().isEmpty()){
                     final String errorMessage = result.getMessage() != null ? result.getMessage() : "Erreur inconue";
-                    args.getPlayer().sendMessage(JUtils.color("&cEchec de connexion : " + errorMessage));
+                    args.getPlayer().sendMessage(JUtils.color("&cEchec d'authentification : " + errorMessage));
                     return;
                 }
 

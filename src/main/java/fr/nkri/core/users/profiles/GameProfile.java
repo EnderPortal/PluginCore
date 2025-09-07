@@ -1,12 +1,15 @@
 package fr.nkri.core.users.profiles;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class GameProfile {
 
     private final int id;
-    private final int coins;
+
+    @Setter
+    private int coins;
 
     /**
      * Player profile for game data
