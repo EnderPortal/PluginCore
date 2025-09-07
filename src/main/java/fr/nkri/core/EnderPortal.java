@@ -27,9 +27,9 @@ public class EnderPortal extends JavaPlugin {
         INSTANCE = this;
 
         //init managers
+        this.serverManager = new ServerManager(this);
         this.authManager = new AuthManager();
         this.userManager = new UserManager();
-        this.serverManager = new ServerManager(this);
     }
 
     @Override
