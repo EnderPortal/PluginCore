@@ -25,7 +25,6 @@ public class UserServiceImpl implements IUserService {
         return CompletableFuture.supplyAsync(() -> {
             try{
                 final String response = APIClient.get(API_URL + "/user", AuthManager.getINSTANCE().getTokenMap().get(playerUuid));
-
                 return GSON.fromJson(response, User.class);
             }
             catch (final Exception e){

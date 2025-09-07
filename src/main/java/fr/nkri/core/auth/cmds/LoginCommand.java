@@ -15,6 +15,7 @@ import java.io.IOException;
 public class LoginCommand extends ICommand {
 
     private final AuthManager authManager = AuthManager.getINSTANCE();
+    private final UserManager userManager = UserManager.getINSTANCE();
 
     @Override
     @Command(name = "login")
@@ -73,17 +74,9 @@ public class LoginCommand extends ICommand {
                 this.authManager.addToken(args.getPlayer().getUniqueId(), token);
 
                 /**
-                 * TEST: recovery of player game data
+                 * Load an account and recovery of player game data
                  */
-                UserManager.getINSTANCE().getUserService().getUser(args.getPlayer().getUniqueId()).thenAccept(user -> {
-                    if(user == null){
-                        args.getPlayer().sendMessage(JUtils.color("&cErreur : impossible de lire vos données."));
-                        return;
-                    }
-
-                    args.getPlayer().sendMessage(JUtils.color("&6Heureux de vous revoir %name%, coins: %coins%")
-                            .replace("%name%", user.getUsername()).replace("%coins%", String.valueOf(user.getProfile().getCoins())));
-                });
+                this.userManager.loadUser(args.getPlayer());
             });
         });
 
