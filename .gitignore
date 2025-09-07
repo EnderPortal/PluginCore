@@ -96,3 +96,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+## Remove env.yml
+env.yml
