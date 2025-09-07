@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import fr.nkri.core.api.APIClient;
 import fr.nkri.core.auth.AuthManager;
 import fr.nkri.core.auth.cmds.LoginCommand;
-import fr.nkri.core.users.User;
+import fr.nkri.core.servers.ServerManager;
 import fr.nkri.core.users.UserManager;
 import fr.nkri.japi.JAPI;
 import fr.nkri.japi.utils.configs.ConfigFile;
@@ -20,6 +20,7 @@ public class EnderPortal extends JavaPlugin {
 
     private AuthManager authManager;
     private UserManager userManager;
+    private ServerManager serverManager;
 
     @Override
     public void onEnable() {
@@ -28,22 +29,10 @@ public class EnderPortal extends JavaPlugin {
         //init managers
         this.authManager = new AuthManager();
         this.userManager = new UserManager();
+        this.serverManager = new ServerManager(this);
 
         //register commands
         JAPI.getInstance().registerCommand(new LoginCommand());
-
-        /**
-         * TEST : CALL API -> /hello, protected route by API KEY
-         */
-        final ConfigFile envConfig = new ConfigFile(this, "env.yml");
-        final String apiKey = envConfig.get().getString("env.API_KEY");
-
-        try {
-            final String response = APIClient.get("http://localhost:3000/hello", apiKey);
-            System.out.println(response);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
